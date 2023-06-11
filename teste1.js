@@ -14,7 +14,7 @@ const getUser = (req, res) => {
     return res.send(userFound);
   }
 
-  res.send({ error: "User not found" });
+  res.status(404).send({ error: "User not found" });
 };
 
 const getUserById = (req, res) => {
@@ -31,7 +31,7 @@ const getUserById = (req, res) => {
     return res.send(userFound);
   }
 
-  res.send({ error: "User not found" });
+  res.status(404).send({ error: "User not found" });
 };
 
 const getUsers = (req, res, next) => {
