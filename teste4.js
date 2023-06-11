@@ -1,13 +1,48 @@
-var data =  require("./fakeData");
+const data = require("./fakeData");
 
-module.exports =  function(req, res) {
-  
-    var id =  req.query.id;
+const updateById = (req, res) => {
+  const id = req.params.id || req.query.id;
 
-    const reg = data.find(d => id == id);
-    reg.name = req.body.name;
-    reg.job = req.body.job;
+  const { name, job } = req.body;
 
-    res.send(reg);
+  if (!id) {
+    return res.status(400).send({ error: "Id is required" });
+  }
 
+  const userFound = data.find((user) => user.id === Number(id));
+
+  if (userFound) {
+    const user = data.find((user) => user.id === Number(id));
+
+    if (checkIfNameExists(name, res, id)) {
+      return;
+    }
+
+    if (name) {
+      user.name = name;
+    }
+
+    if (job) {
+      user.job = job;
+    }
+
+    return res.send(user);
+  }
+
+  return res.status(404).send({ error: "User not found" });
 };
+
+
+const checkIfNameExists = (name, res, id) => {
+  const userFound = data.find((user) => user.name === name);
+
+  if (userFound && userFound.id !== Number(id)) {
+    return res
+      .status(409)
+      .send({ error: `User with name '${userFound.name}' already exists` });
+  }
+
+  return false;
+};
+
+module.exports = { updateById };

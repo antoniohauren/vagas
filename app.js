@@ -36,7 +36,8 @@ app.post("/users", teste2);
 app.delete("/users", teste3.deleteByName);
 app.delete("/users/:id", teste3.deleteById);
 
-app.put("/users", teste4);
+app.put("/users/:id", teste4.updateById);
+app.put("/users", teste4.updateById);
 
 app.get("/users/access", teste5);
 
