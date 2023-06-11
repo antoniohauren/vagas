@@ -21,6 +21,7 @@ const getUserById = (req, res) => {
   const id = req.params.id;
 
   let userFound = null;
+  
   if (id) {
     userFound = data.find((user) => user.id === Number(id));
   }
@@ -34,7 +35,7 @@ const getUserById = (req, res) => {
 };
 
 const getUsers = (req, res, next) => {
-  res.send(data);
+  res.send(data.filter(Boolean));
 };
 
 module.exports = {

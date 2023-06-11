@@ -1,15 +1,40 @@
-var data =  require("./fakeData");
+const data = require("./fakeData");
 
-module.exports = function(req, res) {
-  
-    var name =  req.query.name;
+const deleteByName = (req, res) => {
+    const name = req.query.name;
 
-    for(let i = 0; i < data.length;  i++) {
-        if(i.name == name) {
-            data[i] = null;
-        }
+    let userFound = null;
+
+    if (name) {
+        userFound = data.findIndex((user) => user?.name === name);
     }
 
-    res.send("success");
+    if (userFound !== -1) {
+        data[userFound] = null;
+        return res.send({ data: "Success" });
+    }
 
+    res.send({ error: "User not found" });
 };
+
+const deleteById = (req, res) => {
+    const id = req.query.id;
+
+    let userFound = null;
+
+    if (id) {
+        userFound = data.findIndex((user) => user.id === id);
+    }
+
+    if (userFound && userFound !== -1) {
+        data[userFound] = null;
+        return res.send({ data: "Success" });
+    }
+
+    res.send({ error: "User not found" });
+};
+
+module.exports = {
+    deleteById,
+    deleteByName,
+}
