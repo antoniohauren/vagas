@@ -6,16 +6,10 @@ const getReads = (req, res) => {
   let userFound = null;
 
   if (name) {
-    userFound = data.find((user) => user.name === name);
+    userFound = data.find((user) => user?.name === name);
   }
 
-  if (userFound) {
-    return res.send(
-      `User ${userFound.name} was read ${userFound.reads} times.`
-    );
-  }
-
-  res.status(404).send({ error: "User not found" });
+  teste4(userFound, res);
 };
 
 const getReadsById = (req, res) => {
@@ -24,9 +18,13 @@ const getReadsById = (req, res) => {
   let userFound = null;
 
   if (id) {
-    userFound = data.find((user) => user.id === Number(id));
+    userFound = data.find((user) => user?.id === Number(id));
   }
 
+  teste4(userFound, res);
+};
+
+const teste4 = (userFound, res) => {
   if (userFound) {
     return res.send(
       `User ${userFound.name} was read ${userFound.reads} times.`
