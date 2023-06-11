@@ -41,3 +41,117 @@ Retorne quantas vezes determinado usuário foi lido no teste1.
 
 Definina uma forma de criar permissão para o usuario, defina se o usuário pode deletar ou atualizar usuários. Crie um middleware para validar essas permissões e adicione no teste4 e teste3.
 
+# Rotas:
+
+### Get one user by name:
+---
+[GET]
+```
+/user?name=qwe
+```
+
+### Get one user by id:
+---
+[GET]
+```
+/user/1
+```
+
+### Get all users:
+---
+[GET]
+```
+/users
+```
+
+### Create a user:
+---
+[POST]
+```
+/users
+```
+
+```
+body: {
+  name: string,
+  job: string
+}
+```
+
+### Delete a user by name:
+---
+[DELETE]
+```
+/user?name=qwe
+```
+
+```
+headers: {
+    x-access-token: string
+}
+```
+
+### Delete a user by id:
+---
+[DELETE]
+```
+/user/1
+```
+
+```
+headers: {
+    x-access-token: string
+}
+```
+
+### Update a user by name:
+---
+[PUT]
+```
+/user?name=qwe
+```
+
+```
+headers: {
+    x-access-token: string
+}
+
+body: {
+  name?: string,
+  job?: string
+}
+```
+
+### Update a user by id:
+---
+[PUT]
+```
+user/1
+```
+
+```
+haders: {
+    x-access-token: string
+}
+
+body: {
+  "name?": string,
+  "job?": string
+}
+```
+
+### Check access count:
+---
+[GET]
+```
+users/access/1
+```
+
+### Login:
+---
+[POST]
+```
+{
+    token: 'admin' | 'user'
+}
+```
