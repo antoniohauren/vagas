@@ -1,12 +1,13 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var app = express();
+const express = require("express");
+const bodyParser = require("body-parser");
+const app = express();
 
-var teste1 = require("./teste1");
-var teste2 = require("./teste2");
-var teste3 = require("./teste3");
-var teste4 = require("./teste4");
-var teste5 = require("./teste5");
+const teste1 = require("./teste1");
+const teste2 = require("./teste2");
+const teste3 = require("./teste3");
+const teste4 = require("./teste4");
+const teste5 = require("./teste5");
+const teste6 = require("./teste6");
 
 app.set("view engine", "jade");
 
@@ -27,20 +28,28 @@ app.get("/", function (req, res) {
   `);
 });
 
+// teste 1
 app.get("/user", teste1.getUser);
 app.get("/user/:id", teste1.getUserById);
-
 app.get("/users", teste1.getUsers);
+
+// teste 2
 app.post("/users", teste2);
 
-app.delete("/users", teste3.deleteByName);
-app.delete("/users/:id", teste3.deleteById);
+// teste 3
+app.delete("/users", teste6.tokenMiddleware, teste3.deleteByName);
+app.delete("/users/:id", teste6.tokenMiddleware, teste3.deleteById);
 
-app.put("/users/:id", teste4.updateById);
-app.put("/users", teste4.updateById);
+// teste 4
+app.put("/users/:id", teste6.tokenMiddleware, teste4.updateById);
+app.put("/users", teste6.tokenMiddleware, teste4.updateById);
 
+// teste 5
 app.get("/users/access", teste5.getReads);
 app.get("/users/access/:id", teste5.getReadsById);
+
+// teste 6
+app.post("/login", teste6.tokenGenerate);
 
 const port = 3000;
 
