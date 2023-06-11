@@ -16,7 +16,7 @@ module.exports = function (req, res) {
   // Not a good way to generate ids but it works for now
   const id = data.length + 1;
 
-  const newUser = { id, name, job, hit: 0 };
+  const newUser = { id, name, job, reads: 0 };
 
   data.push(newUser);
 

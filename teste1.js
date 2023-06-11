@@ -10,7 +10,7 @@ const getUser = (req, res) => {
   }
 
   if (userFound) {
-    userFound.hit++;
+    userFound.reads++;
     return res.send(userFound);
   }
 
@@ -27,7 +27,7 @@ const getUserById = (req, res) => {
   }
 
   if (userFound) {
-    userFound.hit++;
+    userFound.reads++;
     return res.send(userFound);
   }
 

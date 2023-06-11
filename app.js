@@ -39,7 +39,8 @@ app.delete("/users/:id", teste3.deleteById);
 app.put("/users/:id", teste4.updateById);
 app.put("/users", teste4.updateById);
 
-app.get("/users/access", teste5);
+app.get("/users/access", teste5.getReads);
+app.get("/users/access/:id", teste5.getReadsById);
 
 const port = 3000;
 
